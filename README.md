@@ -25,8 +25,12 @@ Building Asset with npm
 Setting Env in project, and set your db then running command :
 ```bash
   php artisan migrate --seed
+  
 ```
-
+if error please running this command
+```bash
+  php artisan migrate:fresh --seed
+```
 this project have 2 account default,
 - super admin 
 - admin
