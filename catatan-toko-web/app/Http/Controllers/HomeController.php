@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,10 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $store = Store::all();
-        $data = [
-            'store' => $store
-        ];
-        return view('home', $data);
+        if (Auth::user()->hasRole('guest')) {
+            $store = Store::all();
+            $data = [
+                'store' => $store
+            ];
+            return view('home', $data);
+        } else if (Auth::user()->hasRole('admin')) {
+            return redirect()->route('admin.index');
+        } else if (Auth::user()->hasRole('super-admin')) {
+            return redirect()->route('superAdmin');
+        }
     }
 }

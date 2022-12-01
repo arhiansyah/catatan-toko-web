@@ -19,7 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($admin as $key => $item)
+                                @foreach ($admin24 as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->total }}</td>

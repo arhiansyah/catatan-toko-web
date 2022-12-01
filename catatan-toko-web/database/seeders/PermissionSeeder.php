@@ -22,16 +22,24 @@ class PermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
+        Permission::create(['name' => 'view dashboard-guest']);
         Permission::create(['name' => 'view dashboard-admin']);
         Permission::create(['name' => 'view dashboard-superadmin']);
 
         //create roles and assign existing permissions
+        $userRole = Role::create(['name' => 'guest']);
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo('view dashboard-admin');
 
         $superAdminRole = Role::create(['name' => 'super-admin']);
         $superAdminRole->givePermissionTo('view dashboard-superadmin');
 
+        $guest = User::factory()->create([
+            'name' => 'Guest',
+            'email' => 'guest@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $guest->assignRole($userRole);
         $admin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',

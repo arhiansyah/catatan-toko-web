@@ -65,6 +65,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @can('view dashboard-guest')
+                                <a>Guest</a>
+                                @endcan
                                 @can('view dashboard-admin')
                                 <a class="dropdown-item {{ request()->routeIs('admin.index') ? 'active' : '' }}"
                                     href="{{ route('admin.index') }}">

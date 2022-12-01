@@ -17,7 +17,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admin = Admin::find(Auth::user()->id);
+        $admin = Admin::where('user_id', Auth::user()->id)->first();
         $store_id = $admin->store[0]->id;
         $transaction = Transaction::select('day')
             ->where('store_id', $store_id)
@@ -51,15 +51,19 @@ class AdminController extends Controller
             $countYears[] = count($value);
         }
 
-
-        $admin = $admin->store[0]->transaction;
-        foreach ($admin as $key => $value) {
-            $admin[$key]->total = number_format($value->total);
-            $admin[$key]->total = (string) $admin[$key]->total;
+        $admin24 = $admin->store[0]->transaction;
+        foreach ($admin24 as $key => $value) {
+            $admin24[$key]->total = number_format($value->total);
+            $admin24[$key]->total = (string) $admin24[$key]->total;
         }
+        // if (isset($admin->store)) {
+        //     // $admin24 = $admin->store[0]->transaction;
+        //     # code...
+        // }
         // dd($admin);
         $data = [
             'admin' => $admin,
+            'admin24' => $admin24,
             'day' => $day,
             'month' => $month,
             'year' => $year,

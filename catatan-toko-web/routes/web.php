@@ -23,6 +23,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home', [App\Http\Controllers\StoreController::class, 'store'])->name('post.store');
+Route::delete('/delete/{id}', [\App\Http\Controllers\StoreController::class, 'destroy'])->name('delete.store');
 Route::resource('/admin', \App\Http\Controllers\AdminController::class);
 Route::get('/superAdmin', [\App\Http\Controllers\SuperAdminController::class, 'index'])->name('superAdmin');
+Route::post('/superAdmin', [App\Http\Controllers\SuperAdminController::class, 'store'])->name('superAdmin.store');
 Route::get('image/{file}', [\App\Http\Controllers\SuperAdminController::class, 'download'])->name('download');

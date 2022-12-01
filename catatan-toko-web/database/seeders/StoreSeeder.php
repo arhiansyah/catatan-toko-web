@@ -16,13 +16,13 @@ class StoreSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Admin::create([
-            'name' => 'admin store nugasoma',
-            'user_id' => 1
-        ]);
-        Store::create([
-            'name' => 'store nugasoma',
-            'admin_id' => $admin->id
-        ]);
+        // $admin = Admin::create([
+        //     'name' => 'admin store nugasoma',
+        //     'user_id' => 2
+        // ]);
+        // Store::create([
+        //     'name' => 'store nugasoma',
+        //     'admin_id' => $admin->id
+        // ]);
     }
 }

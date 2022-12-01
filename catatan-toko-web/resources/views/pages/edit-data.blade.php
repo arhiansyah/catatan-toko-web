@@ -6,37 +6,32 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-block">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                    @endif
-
-                    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+                    <h4>Edit Data</h4>
+                    <form action="" enctype="multipart/form-data" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Name Store</label>
-                            <div class="input-group">
-                                <select name="store[]" id="storeArrayID" class="form-select form-select-lg">
+                            <div class="input-group" x-data="{ open: false, show: true }">
+                                <a class="btn btn-secondary btn-lg  me-2" x-on:click="open = ! open, hide()">Add
+                                    New
+                                    Store</a>
+                                <div x-show="open" class="me-3" x-cloak>
+                                    <input type="text" class="w-full form-control form-control-lg" name="store"
+                                        id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        placeholder="Input your name store">
+                                </div>
+                                <select name="storeArray[]" id="storeArrayID" class="form-select form-select-lg">
                                     <option value="" selected>Choose any store you want</option>
-                                    @foreach ($store as $item)
+                                    {{-- @foreach ($store as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
 
                             </div>
                         </div>
                         <hr>
                         <div class="row g-2">
-                            <div class="col-md">
-                                <label for="">Date</label>
-                                <input type="date" name="day" class="form-control @error('day') is-invalid @enderror">
-                                @if($errors->has('day'))
-                                <div id="validationServer03Feedback" class="invalid-feedback">
-                                    {{ $errors->first('day') }}
-                                </div>
-                                @endif
-                            </div>
                             <div class="col-md">
                                 <label for="">Daily Sales Total</label>
                                 <input type="text" name="total"
@@ -64,18 +59,3 @@
     </div>
 </div>
 @endsection
-
-@yield('script')
-<script type="text/javascript">
-    window.onload = function () {
-        var rupiah = document.getElementById('rupiah');
-        rupiah.addEventListener('keyup', function(e) {
-            let result = formatRupiah(this.value, 'Rp. ');
-            document.getElementById('rupiah').value = result;
-        });
-
-
-    }
-
-
-</script>

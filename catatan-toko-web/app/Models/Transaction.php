@@ -16,4 +16,14 @@ class Transaction extends Model
         'user_id',
         'store_id'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'store_id');
+    }
 }
